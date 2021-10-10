@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Project 84</title>
+        <style>
+            #c{
+                border: 3px ridge yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Press any Key</h1>
+        <canvas id="c" width="700px" height="400px"></canvas><br>
+        <label id="l"></label>
+    </body>
+    <script>
+        var canvas = document.getElementById("c"), ctx = canvas.getContext("2d"), lv=null, k = null;
+        var checkRange = function(min, max){
+            if(k>=min && k<=max){
+                return true;
+                console.log("here");
+            }else{
+                return false;
+                console.log("not here");
+            }
+        }
+        var setText = function(text){
+            document.getElementById("l").innerHTML = text;
+            console.log(text+", "+k);
+        }
+        var my_keydown = function(e){
+            k = e.keyCode 
+            var img = new Image();
+            if(checkRange(65, 90) || checkRange(97, 122)){
+                img.src = "Alpkey.png";
+                setText("Alphabet Key");
+            }else if(checkRange(48, 57)){
+                img.src = "numkey.png";
+                setText("Number Key");
+            }else if(checkRange(37, 40)){
+                img.src = "Arrkey.png";
+                setText("Arrow Key");
+            }else if(checkRange(17, 18) || 27){
+                img.src = "spkey.png";
+                setText("Special Key");
+            }else{
+                img.src = "otherkey.png";
+                setText("Other Key");
+            }
+            img.onload = function(){
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            }
+            
+        }
+        window.addEventListener("keydown", my_keydown)
+    </script>
+</html>
